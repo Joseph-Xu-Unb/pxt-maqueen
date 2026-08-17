@@ -9,6 +9,8 @@
     },
     "files": [
         "maqueen.ts",
+        "maqueen-v4.ts",
+        "maqueen-v5.ts",
         "_locales/zh-cn/maqueen-strings.json",
         "_locales/zh-tw/maqueen-strings.json",
         "_locales/pt/maqueen-strings.json",

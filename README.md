@@ -48,6 +48,11 @@ maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOn)
 basic.showString(maqueen.IR_read_version())
 ```
 
+## Documentation
+
+* [Feature documentation](docs/FEATURES.md)
+* [Design documentation](docs/DESIGN.md)
+
 ## License
 
 MIT
