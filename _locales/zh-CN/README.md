@@ -15,7 +15,7 @@
 * Read ultrasonic sensor
 
 ```blocks
-basic.showNumber(maqueen.Ultrasonic(PingUnit.Centimeters))
+basic.showNumber(maqueen.Ultrasonic())
 ```
 
 * Set the  Maqueen servos 
@@ -40,12 +40,6 @@ serial.writeNumber(maqueen.readPatrol(maqueen.Patrol.PatrolLeft))
 
 ```blocks
 maqueen.writeLED(maqueen.LED.LEDLeft, maqueen.LEDswitch.turnOn)
-```
-
-* Read IR sensor value
-
-```blocks
-basic.showNumber(maqueen.IR_read())
 ```
 
 * Read the version number

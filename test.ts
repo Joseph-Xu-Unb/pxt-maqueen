@@ -1,4 +1,5 @@
-// Add your code here
+// Smoke test for the Maqueen v4 block APIs.
+// It exercises each public helper once so `pxt test` can catch compile-time regressions.
 maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 100)
 basic.pause(1000)
 maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 100)
@@ -31,4 +32,3 @@ serial.writeLine("V:" + maqueen.IR_read_version())
 basic.pause(1000)
 serial.writeLine("CM:" + maqueen.Ultrasonic())
 basic.pause(1000)
-

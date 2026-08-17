@@ -9,7 +9,6 @@
     },
     "files": [
         "maqueen.ts",
-        "enums.d.ts",
         "_locales/zh-cn/maqueen-strings.json",
         "_locales/zh-tw/maqueen-strings.json",
         "_locales/pt/maqueen-strings.json",
@@ -18,7 +17,6 @@
         "_locales/nb/maqueen-strings.json",
         "_locales/cs/maqueen-strings.json",
         "_locales/pl/maqueen-strings.json",
-        "shims.d.ts",
         "README.md",
         "_locales/ru/maqueen-strings.json",
         "_locales/ru/maqueen-jsdoc-strings.json",
@@ -34,6 +32,8 @@
         "_locales/pl/maqueen-jsdoc-strings.json",
         "_locales/ko/maqueen-strings.json",
         "_locales/ko/maqueen-jsdoc-strings.json",
+        "_locales/sv/maqueen-strings.json",
+        "_locales/sv/maqueen-jsdoc-strings.json",
         "_locales/zh-CN/README.md"
     ],
     "testFiles": [

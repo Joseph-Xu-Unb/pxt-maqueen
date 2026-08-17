@@ -1,22 +1,17 @@
 /**
  * @file pxt-maqueen/maqueen.ts
  * @brief DFRobot's maqueen makecode library.
+ * Defines the MakeCode blocks and TypeScript APIs for Maqueen v4 and v5 robots.
  * @n [Get the module here](https://www.dfrobot.com.cn/goods-1802.html)
  * @n This is a MakeCode graphical programming education robot.
  *
  * @copyright    [DFRobot](http://www.dfrobot.com), 2016
- * @copyright    MIT Lesser General Public License
+ * @copyright    MIT
  *
  * @author [email](jie.tang@dfrobot.com)
  * @date  2019-10-08
 */
-let maqueencb: Action
-let maqueenmycb: Action
-let maqueene = "1"
-let maqueenparam = 0
-let alreadyInit = 0
-let IrPressEvent = 0
-const MOTER_ADDRESSS = 0x10
+const MOTOR_ADDRESS = 0x10
 
 enum PingUnit {
     //% block="cm"
@@ -397,24 +392,7 @@ namespace maqueen {
 
 
 
-/*''''''''''''''''''''''''''''''''''    maqueen V5  ''''''''''''''''''''''''''''''''''''''''''''''''''*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Maqueen V5 */
 //% group="Maqueen_v5"
 //% weight=100 color=#0fbc11 icon="\uf48b" block="Maqueen v5"
 namespace Maqueen_V5 {
@@ -433,8 +411,6 @@ namespace Maqueen_V5 {
     let kbCallback1: KV1[] = [];
     let kbCallback2: KV[] = [];
     const I2CADDR = 0x10;
-    let servo1_num:number = 20;
-    let servo2_num: number = 20;
     export enum Patrolling {
         //% block="ON"
         ON = 1,
@@ -565,42 +541,40 @@ namespace Maqueen_V5 {
     }
     export const enum BleCmd {
         //% block="Go forward"
-        BleForward = 1,         /**< advance */
+        BleForward = 1,
         //% block="Go backward"
-        BleBackward = 2,         /**< astern */
+        BleBackward = 2,
         //% block="Turn left"
-        BleLeft = 3,             /**< turn left */
+        BleLeft = 3,
         //% block="Turn right"
-        BleRight = 4,           /**< turn right */
+        BleRight = 4,
         //% block="RGB red"
-        BleRgbR = 5,           /**< Red */
+        BleRgbR = 5,
         //% block="RGB green"
-        BleRgbG = 6,            /**< Green */
+        BleRgbG = 6,
         //% block="RGB blue"
-        BleRgbB = 7,           /**< Blue */
+        BleRgbB = 7,
         //% block="RGB purple"
-        BleRgbRB = 8,          /**< Purple */
+        BleRgbRB = 8,
         //% block="RGB yellow"
-        BleRgbRG = 9,          /**< Yellow */
+        BleRgbRG = 9,
         //% block="RGB cyan"
-        BleRgbGB = 10,         /**< Cyan */
+        BleRgbGB = 10,
         //% block="RGB white"
-        BleRgbRGB = 11,        /**< White */
+        BleRgbRGB = 11,
         //% block="RGB OFF"
-        BleRgbOff = 12,        /**< Off */
+        BleRgbOff = 12,
         //% block="Turn servo1 right"
-        BleServo1Right = 13,   /**< servo1 turn right */
+        BleServo1Right = 13,
         //% block="Turn servo1 left"
-        BleServo1Left = 14,     /**< servo1 turn left */
+        BleServo1Left = 14,
         //% block="Turn servo2 right"
-        BleServo2Right = 15,    /**< servo2 turn right */
+        BleServo2Right = 15,
         //% block="Turn servo2 left"
-        BleServo2Left = 16,    /**< servo2 turn left */
+        BleServo2Left = 16,
     };
      const  MOTOR_0                    =0
-     const  SPEED_0                    =1
      const  MOTOR_1                    =2
-     const  SPEED_1                    =3
 
      const  RGB_L                      =11
      const  RGB_R                      =12
@@ -630,18 +604,9 @@ namespace Maqueen_V5 {
      const  BATTERY                    =46
      const  MOTOR_TYPE_H               =47
      const  MOTOR_TYPE_L               =48
-     const  VERSON_LEN                 =50
-     const  VERSON_DATA                =51
-     const  MY_SYS_INIT                =70
      const  LINE_WALKING               =71
      const  LINE_SPEED_GRADE           =72
      const  CAR_STATE                  =73
-     const  CROSS_DEFAULT              =75
-     const  T1_DEFAULT                 =76
-     const  T2_DEFAULT                 =77
-     const  T3_DEFAULT                 =78
-     const  BLECMD                     =80
-     const  BLEEN                     = 81
     /**
      *  Init I2C until success
     */
@@ -682,7 +647,7 @@ namespace Maqueen_V5 {
         basic.clearScreen()
     }
 
-    function I2CWirte(Reg:number,data:number){
+    function I2CWrite(Reg:number,data:number){
         let allBuffer = pins.createBuffer(2);
         allBuffer[0] = Reg;
         allBuffer[1] = data;
@@ -737,21 +702,21 @@ namespace Maqueen_V5 {
             buf[0] = MOTOR_0;
             buf[1] = direction;
             buf[2] = speed;
-            pins.i2cWriteBuffer(MOTER_ADDRESSS, buf);
+            pins.i2cWriteBuffer(MOTOR_ADDRESS, buf);
         }
         if (index == 1) {
             buf[0] = MOTOR_1;
             buf[1] = direction;
             buf[2] = speed;
-            pins.i2cWriteBuffer(MOTER_ADDRESSS, buf);
+            pins.i2cWriteBuffer(MOTOR_ADDRESS, buf);
         }
         if (index == 2) {
             buf[0] = MOTOR_0;
             buf[1] = direction;
             buf[2] = speed;
-            pins.i2cWriteBuffer(MOTER_ADDRESSS, buf);
+            pins.i2cWriteBuffer(MOTOR_ADDRESS, buf);
             buf[0] = MOTOR_1;
-            pins.i2cWriteBuffer(MOTER_ADDRESSS, buf);
+            pins.i2cWriteBuffer(MOTOR_ADDRESS, buf);
         }
     }
 
@@ -981,20 +946,20 @@ namespace Maqueen_V5 {
     //% group="Maqueen_v5"
     export function setRgbBlink(type: DirectionType, num: number, grade: SpeedGrade, rgb: CarLightColors) {
         if (type == DirectionType.Left) {
-            I2CWirte(RGB_L, rgb);
-            I2CWirte(RGB_BLINK_GRADE_L, grade);
-            I2CWirte(RGB_BLINK_NUM_L, num);
+            I2CWrite(RGB_L, rgb);
+            I2CWrite(RGB_BLINK_GRADE_L, grade);
+            I2CWrite(RGB_BLINK_NUM_L, num);
         } else if (type == DirectionType.Right) {
-            I2CWirte(RGB_R, rgb);
-            I2CWirte(RGB_BLINK_GRADE_R, grade);
-            I2CWirte(RGB_BLINK_NUM_R, num);
+            I2CWrite(RGB_R, rgb);
+            I2CWrite(RGB_BLINK_GRADE_R, grade);
+            I2CWrite(RGB_BLINK_NUM_R, num);
         } else if (type == DirectionType.All) {
-            I2CWirte(RGB_L, rgb);
-            I2CWirte(RGB_BLINK_GRADE_L, grade);
-            I2CWirte(RGB_BLINK_NUM_L, num);
-            I2CWirte(RGB_R, rgb);
-            I2CWirte(RGB_BLINK_GRADE_R, grade);
-            I2CWirte(RGB_BLINK_NUM_R, num);
+            I2CWrite(RGB_L, rgb);
+            I2CWrite(RGB_BLINK_GRADE_L, grade);
+            I2CWrite(RGB_BLINK_NUM_L, num);
+            I2CWrite(RGB_R, rgb);
+            I2CWrite(RGB_BLINK_GRADE_R, grade);
+            I2CWrite(RGB_BLINK_NUM_R, num);
         }
     }
 
@@ -1008,13 +973,13 @@ namespace Maqueen_V5 {
     //% group="Maqueen_v5"
     export function setRgbchange(type: DirectionType, grade: SpeedGrade) {
         if (type == DirectionType.Left) {
-            I2CWirte(RGB_GRADUAL_CHANGE_GRADE_L, grade);
+            I2CWrite(RGB_GRADUAL_CHANGE_GRADE_L, grade);
         } else if (type == DirectionType.Right) {
-            I2CWirte(RGB_GRADUAL_CHANGE_GRADE_R, grade);
+            I2CWrite(RGB_GRADUAL_CHANGE_GRADE_R, grade);
         }
         else if (type == DirectionType.All) {
-            I2CWirte(RGB_GRADUAL_CHANGE_GRADE_L, grade);
-            I2CWirte(RGB_GRADUAL_CHANGE_GRADE_R, grade);
+            I2CWrite(RGB_GRADUAL_CHANGE_GRADE_L, grade);
+            I2CWrite(RGB_GRADUAL_CHANGE_GRADE_R, grade);
         }
     }
     /**
@@ -1065,133 +1030,4 @@ namespace Maqueen_V5 {
         if (temp_data > 100) temp_data=100;
         return temp_data;
     }
-    // // /**
-    // //  *  Enable or disable BLE
-    // //  */
-    // // //% block="Bluetooth of Maqueen_v5  %cmd"
-    // // //% weight=5
-    // // //% group="Maqueen_v5"
-    // export function BleModule(cmd: Patrolling) {
-    //     let allBuffer = pins.createBuffer(2);
-    //     allBuffer[0] = BLEEN;
-    //     allBuffer[1] = cmd;
-    //     pins.i2cWriteBuffer(I2CADDR, allBuffer);
-    // }
-    // /**
-    //  *  Bluetooth of Maqueen V5 commands control the configuration by default
-    //  * @param Received Bluetooth command
-    //  */
-    // //% block="Maqueen_v5 Default Bluetooth command control %cmd"
-    // //% weight=1
-    // //% group="Maqueen_v5"
-    // export function BleCmdDefault(cmd: number){
-    //     switch (cmd) {
-    //         case BleCmd.BleForward:
-    //             motorRun(Motors.All, Dir.CW,100);
-    //             basic.pause(100);
-    //             motorRun(Motors.All, Dir.CW, 0);
-    //             break;
-    //         case BleCmd.BleBackward:
-    //             motorRun(Motors.All, Dir.CCW, 100);
-    //             basic.pause(100);
-    //             motorRun(Motors.All, Dir.CCW, 0);
-    //             break;
-    //         case BleCmd.BleLeft:
-    //             motorRun(Motors.M2, Dir.CCW, 100);
-    //             basic.pause(100);
-    //             motorRun(Motors.All, Dir.CCW, 0);
-    //             break;
-    //         case BleCmd.BleRight:
-    //             motorRun(Motors.M1, Dir.CCW, 100);
-    //             basic.pause(100);
-    //             motorRun(Motors.All, Dir.CCW, 0);
-    //             break;
-    //         case BleCmd.BleRgbR:
-    //             setRgblLed(DirectionType.All, CarLightColors.Red);
-    //             break;
-    //         case BleCmd.BleRgbG:
-    //             setRgblLed(DirectionType.All, CarLightColors.Green);
-    //             break;
-    //         case BleCmd.BleRgbB:
-    //             setRgblLed(DirectionType.All, CarLightColors.Blue);
-    //             break;
-    //         case BleCmd.BleRgbRB:
-    //             setRgblLed(DirectionType.All, CarLightColors.Purple);
-    //             break;
-    //         case BleCmd.BleRgbRG:
-    //             setRgblLed(DirectionType.All, CarLightColors.Yellow);
-    //             break;
-    //         case BleCmd.BleRgbGB:
-    //             setRgblLed(DirectionType.All, CarLightColors.Cyan);
-    //             break;
-    //         case BleCmd.BleRgbRGB:
-    //             setRgblLed(DirectionType.All, CarLightColors.White);
-    //             break;
-    //         case BleCmd.BleRgbOff:
-    //             setRgblLed(DirectionType.All, CarLightColors.Black);
-    //             break;
-    //         case BleCmd.BleServo1Right:
-    //             if (servo1_num < 180) servo1_num += 5;
-    //             servoRun(Servos.S1, servo1_num);
-    //             break;
-    //         case BleCmd.BleServo1Left:
-    //             if (servo1_num > 0) servo1_num -= 5;
-    //             servoRun(Servos.S1, servo1_num);
-    //             break;
-    //         case BleCmd.BleServo2Right:
-    //             if (servo2_num <= 180) servo2_num += 5;
-    //             servoRun(Servos.S2, servo2_num);
-    //             break;
-    //         case BleCmd.BleServo2Left:
-    //             if (servo2_num > 0) servo2_num -= 5;
-    //             servoRun(Servos.S2, servo2_num);
-    //             break;
-    //         default:
-    //             break;
-    //     }
-
-    // }
-
-    // /**
-    //  * Get commands from Bluetooth of Maqueen V5
-    //  */
-    // let Ble_state: number;
-    // let Ble_cmd: number;
-    // //% block="get Bluetooth commands"
-    // //% weight=3
-    //  //% group="Maqueen_v5"
-    // export function BleGetCmd(): number {
-    //     let allBuffer = pins.createBuffer(2);
-    //     pins.i2cWriteNumber(I2CADDR, BLECMD, NumberFormat.Int8LE);
-    //     allBuffer = pins.i2cReadBuffer(I2CADDR, 1);
-    //     let temp_data = allBuffer[0];
-    //     return temp_data;
-    // }
-    // /**
-    //  * When Bluetooth data from Maqueen V5 is received
-    //  * @param value describe value here, eg: 5
-    //  */
-    // //% weight=2
-    // //% block="When received"
-    // //% draggableParameters
-    // //% group="Maqueen_v5"
-    // export function BlecallbackUser(cb: (Blecmd: number) => void) {
-    //     Ble_state = 1;
-    //     control.onEvent(33, 44, function () {
-    //         cb(Ble_cmd)
-    //     })
-    // }
-
-    // basic.forever(() => {
-    //     if (Ble_state == 1) {
-    //         Ble_cmd = BleGetCmd();
-    //         if (Ble_cmd != 0) {
-    //             control.raiseEvent(33, 44)
-    //         }
-    //     }
-    //     basic.pause(50);
-    // })
-
-
 }
-
